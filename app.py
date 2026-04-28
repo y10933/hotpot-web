@@ -16,13 +16,10 @@ def index():
 
     if request.method == "POST":
         selected = request.form.get("food")
-        if selected in menu:
-            total = menu[selected]
+        if selected:
+            total = menu.get(selected, 0)
 
-    return render_template("index.html",
-                           menu=menu,
-                           total=total,
-                           selected=selected)
+    return render_template("index.html", menu=menu, total=total, selected=selected)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
