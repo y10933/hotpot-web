@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>火鍋訂餐</title>
+</head>
+
+<body>
+
+<h1>🍲 火鍋訂餐系統</h1>
+
+<form method="POST">
+
+<select name="food">
+  {% for name, price in menu.items() %}
+  <option value="{{name}}">
+    {{name}} - {{price}}元
+  </option>
+  {% endfor %}
+</select>
+
+<button type="submit">送出</button>
+
+</form>
+
+<h2>你選擇：{{selected}}</h2>
+<h2>💰 總金額：{{total}}</h2>
+
+</body>
+</html>
