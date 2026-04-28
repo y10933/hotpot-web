@@ -2,7 +2,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>火鍋訂餐</title>
+<title>火鍋訂餐系統</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #fff3e0;
+    padding: 20px;
+}
+
+h1 {
+    color: #d84315;
+}
+
+.box {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+button {
+    background: #ff7043;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+}
+</style>
+
 </head>
 
 <body>
@@ -11,18 +40,59 @@
 
 <form method="POST">
 
-<select name="food">
-  {% for name, price in menu.items() %}
-  <option value="{{ name }}">{{ name }} - {{ price }}元</option>
-  {% endfor %}
+<div class="box">
+<h2>主餐</h2>
+<select name="main">
+{% for name, price in menu.items() %}
+<option value="{{name}}">{{name}} - {{price}}</option>
+{% endfor %}
 </select>
 
-<button type="submit">送出</button>
+數量：
+<input type="number" name="main_qty" value="1" min="1" max="5">
+</div>
+
+<div class="box">
+<h2>副餐</h2>
+<select name="side">
+{% for name, price in side.items() %}
+<option value="{{name}}">{{name}} - {{price}}</option>
+{% endfor %}
+</select>
+
+數量：
+<input type="number" name="side_qty" value="1" min="1" max="5">
+</div>
+
+<div class="box">
+<h2>加肉</h2>
+{% for name, price in meat.items() %}
+<label>
+<input type="checkbox" name="meat" value="{{name}}">
+{{name}} +{{price}}
+</label><br>
+{% endfor %}
+</div>
+
+<div class="box">
+<h2>刪除訂單（輸入名稱）</h2>
+<input type="text" name="delete" placeholder="輸入要刪除的品項">
+</div>
+
+<button type="submit">送出訂單</button>
 
 </form>
 
-<h2>你選擇：{{ selected }}</h2>
-<h2>💰 總金額：{{ total }}</h2>
+<hr>
+
+<div class="box">
+<h2>🧾 訂單</h2>
+{% for item in cart %}
+<p>{{item}}</p>
+{% endfor %}
+
+<h2>💰 總金額：{{total}}</h2>
+</div>
 
 </body>
 </html>
